@@ -1,5 +1,0 @@
-const GET_BOSSES = 'GET_BOSSES';
-const UPDATE_BOSS = 'UPDATE_BOSS';
-const ADD_BOSS = 'ADD_BOSS';
-const DELETE_BOSS = 'DELETE_BOSS';
-

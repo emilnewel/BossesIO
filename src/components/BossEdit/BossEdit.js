@@ -1,0 +1,95 @@
+import React from 'react'
+import { connect } from 'react-redux'
+import { getBoss } from '../../actions/getBossAction'
+import { updateBoss } from '../../actions/updateBossAction'
+import { deleteBoss } from '../../actions/deleteBossAction'
+
+class BossEdit extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      id : 0,
+      name: '',
+      description: '',
+      img: ''
+    }
+  };
+
+  onSubmit(e, updatedBoss){
+    e.preventDefault();
+    const {updateBoss} = this.props;
+    updateBoss(updatedBoss);
+  }
+
+  deleteBoss(e, bossId){
+    e.preventDefault();
+    const { deleteBoss } = this.props;
+    deleteBoss(bossId);
+    this.props.history.push('/bosses')
+   
+    
+  }
+
+  fillState(){
+    const { name, description, img } = this.props;
+    const { id } = this.props.match.params;
+    this.setState({
+      id, name, description, img
+    })
+  }
+
+  render() {
+    const { name, description, img } = this.state;
+    const { id } = this.props.match.params
+    if(this.state.id === 0) {
+      const { getBoss } = this.props;
+      getBoss(id).then(() => this.fillState()).then(() => Promise.resolve());
+    }
+
+    return (
+      <>  
+      <div className='row mt-5 justify-content-center'>
+        <form style={{width: 40+'%'}} className='text-center'>
+          <fieldset>
+            <legend>Update boss information</legend>
+            <div className='form-group' >
+              <label className='col-form-label'>Name</label>
+              <input type='text' value={name} onChange={e => this.setState({name: e.target.value})} className='form-control' style={{borderRadius: 1+'rem'}}/>
+              <label>Description</label>
+              <textarea className='form-control' onChange={e => this.setState({description: e.target.value})} value={description} rows='3' style={{borderRadius: 1+'rem'}}></textarea>
+              <label className='col-form-label'>URL to image</label>
+              <input type='text' onChange={e => this.setState({img: e.target.value})} value={img} className='form-control' style={{borderRadius: 1+'rem'}}/>
+              <input type='submit' className='btn btn-primary' onClick={e => this.onSubmit(e, this.state)} value='Submit' style={{borderRadius: 1+'rem', marginTop: 10+'px',float: 'right'}} />
+              <button className='btn btn-danger' style={{borderRadius: 1+'rem', marginTop: 10+'px', marginRight: 10+'px', float: 'right'}} onClick={e => this.deleteBoss(e, id)}> Delete boss</button> 
+            </div>
+          </fieldset>
+        </form>
+        
+        <div className='col-md-4 col-lg-4'>
+          <strong>Updated card will look like</strong>
+          <div className='card border-primary mb-3 mx-2' style={{borderRadius: 1+'rem'}} >
+            <img className='card-img-top img-fluid mx-auto' style={{width: 60+'%'}} src={img} alt='hero' />
+            <div className='card-body'>
+              <h3 className='card-title'>{name}</h3>
+              <p className='card-text'>
+                {description}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      </>
+    );
+  };
+}
+
+const mapStateToProps = reduxStoreState => {
+  console.log(reduxStoreState)
+  return{
+    id : reduxStoreState.bosses.boss.id,
+    name: reduxStoreState.bosses.boss.name,
+    description: reduxStoreState.bosses.boss.description,
+    img: reduxStoreState.bosses.boss.img
+  }
+}
+export default connect(mapStateToProps, { getBoss, updateBoss, deleteBoss })(BossEdit);

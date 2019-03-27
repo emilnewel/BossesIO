@@ -62,6 +62,8 @@ const megamanBosses = [
     }
 ]
 
+let nextId = 11;
+
 const setupRoutes = router => {
     router.get('/bosses', (req, res) => {
         return res.json(megamanBosses);
@@ -76,6 +78,7 @@ const setupRoutes = router => {
         const boss = megamanBosses.find(mb => mb.id == req.params.id);
         if (!boss) { return res.sendStatus(404); }
 
+        console.log(req.body);
         // Update properties
         if (name) { boss.name = name; }
         if (description) { boss.description = description; }
@@ -88,7 +91,8 @@ const setupRoutes = router => {
         if (!isBossValid(name, description, img)) { return res.sendStatus(400); }
 
         const newBoss = req.body;
-        newBoss.id = megamanBosses.length + 1;
+
+        newBoss.id = nextId++;
 
         megamanBosses.push(newBoss);
 
@@ -99,7 +103,7 @@ const setupRoutes = router => {
         if (!boss) { return res.sendStatus(404); }
         const idx = megamanBosses.indexOf(boss);
         megamanBosses.splice(idx, 1);
-
+        console.log(megamanBosses);
         return res.sendStatus(204);
     });
 };
