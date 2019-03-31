@@ -10,7 +10,6 @@ export const deleteBoss = (id) => {
                 return;
             } else {
                 console.log(response.status);
-                //dispatch(getBossesFromServerFailed(response.status));
             }
         }).then(() => {
             dispatch(deleteBossFromServerSuccess(id));

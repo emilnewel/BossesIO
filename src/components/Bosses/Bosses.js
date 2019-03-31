@@ -43,7 +43,6 @@ class Bosses extends Component {
 
 
 const mapStateToProps = reduxStoreState => { 
-  console.log(reduxStoreState)
   return {
     bosses: reduxStoreState.bosses.bosses
   }

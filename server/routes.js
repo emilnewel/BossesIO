@@ -87,6 +87,7 @@ const setupRoutes = router => {
         return res.sendStatus(204);
     });
     router.post('/bosses', (req, res) => {
+        console.log(req.body);
         const { name, description, img } = req.body;
         if (!isBossValid(name, description, img)) { return res.sendStatus(400); }
 

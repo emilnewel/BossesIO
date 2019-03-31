@@ -14,7 +14,7 @@ const AddBossModal = ({handleClose, show}) =>{
             </button>
           </div>
           <div className="modal-body">
-            <AddBossForm />
+            <AddBossForm hide={handleClose}/>
           </div>
         </div>
       </div>

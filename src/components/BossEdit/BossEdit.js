@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { getBoss } from '../../actions/getBossAction'
 import { updateBoss } from '../../actions/updateBossAction'
 import { deleteBoss } from '../../actions/deleteBossAction'
+import Validator from 'simple-react-validator'
 
 class BossEdit extends React.Component {
   constructor(props){
@@ -12,22 +13,28 @@ class BossEdit extends React.Component {
       name: '',
       description: '',
       img: ''
-    }
+    };
+    this.validator = new Validator();
   };
 
   onSubmit(e, updatedBoss){
     e.preventDefault();
-    const {updateBoss} = this.props;
-    updateBoss(updatedBoss);
+    if(this.validator.allValid()){
+      const {updateBoss} = this.props;
+      updateBoss(updatedBoss);
+      this.confirmUpdate()
+    } else{
+      this.validator.showMessages();
+      this.forceUpdate();
+    }
+    
+    
   }
 
   deleteBoss(e, bossId){
     e.preventDefault();
     const { deleteBoss } = this.props;
-    deleteBoss(bossId);
-    this.props.history.push('/bosses')
-   
-    
+    deleteBoss(bossId).then(() => this.props.history.push('/bosses'));
   }
 
   fillState(){
@@ -36,6 +43,10 @@ class BossEdit extends React.Component {
     this.setState({
       id, name, description, img
     })
+  }
+
+  confirmUpdate(){
+    alert('You\'ve succesfully updated this boss!')
   }
 
   render() {
@@ -54,11 +65,14 @@ class BossEdit extends React.Component {
             <legend>Update boss information</legend>
             <div className='form-group' >
               <label className='col-form-label'>Name</label>
-              <input type='text' value={name} onChange={e => this.setState({name: e.target.value})} className='form-control' style={{borderRadius: 1+'rem'}}/>
+              <input type='text' value={name} onChange={e => this.setState({name: e.target.value})} className='form-control' style={{borderRadius: 1+'rem'}} />
+              <strong  style={{color: '#DF691A'}}>{this.validator.message('Name', this.state.name, 'required|string')}</strong>
               <label>Description</label>
               <textarea className='form-control' onChange={e => this.setState({description: e.target.value})} value={description} rows='3' style={{borderRadius: 1+'rem'}}></textarea>
+              <strong  style={{color: '#DF691A'}}>{this.validator.message('Description', this.state.description, 'required|string')}</strong>
               <label className='col-form-label'>URL to image</label>
-              <input type='text' onChange={e => this.setState({img: e.target.value})} value={img} className='form-control' style={{borderRadius: 1+'rem'}}/>
+              <input type='text'  onChange={e => this.setState({img: e.target.value})} value={img} className='form-control' style={{borderRadius: 1+'rem'}} />
+              <strong  style={{color: '#DF691A'}}>{this.validator.message('Image', this.state.img, 'required|string')}</strong>
               <input type='submit' className='btn btn-primary' onClick={e => this.onSubmit(e, this.state)} value='Submit' style={{borderRadius: 1+'rem', marginTop: 10+'px',float: 'right'}} />
               <button className='btn btn-danger' style={{borderRadius: 1+'rem', marginTop: 10+'px', marginRight: 10+'px', float: 'right'}} onClick={e => this.deleteBoss(e, id)}> Delete boss</button> 
             </div>
@@ -84,7 +98,6 @@ class BossEdit extends React.Component {
 }
 
 const mapStateToProps = reduxStoreState => {
-  console.log(reduxStoreState)
   return{
     id : reduxStoreState.bosses.boss.id,
     name: reduxStoreState.bosses.boss.name,

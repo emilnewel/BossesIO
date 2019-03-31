@@ -1,5 +1,5 @@
 import React from 'react'
-
+import { Link } from 'react-router-dom';
 const BossCard = (props) => {
   const { bosses } = props;
   return(
@@ -9,7 +9,7 @@ const BossCard = (props) => {
           <div className="card border-primary mb-3 mx-2" style={{borderRadius: 1+'rem'}}>
             <img className="card-img-top img-fluid mx-auto" style={{width: 60+'%'}} src={ bosses[b].img} alt="" />
             <div className="card-body">
-              <h3 className="card-title">{ bosses[b].name }</h3>
+              <h3 className="card-title"><Link to={"/bosses/"+bosses[b].id }>{ bosses[b].name }</Link></h3>
               <p className="card-text">
                 {bosses[b].description}
               </p>

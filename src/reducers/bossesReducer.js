@@ -20,15 +20,15 @@ const bossesReducer = (state = initialState, action) => {
                 boss : action.payload
             }
         case 'DELETE_BOSS':
-            console.log(state.bosses)
-            // let id = action.payload;
-            // let oldBosses = state.bosses;
-            // let newBossList = oldBosses.filter(boss => boss.id != id);
-            // console.log(newBossList)
+            let id = action.payload;
+            let oldBosses = state.bosses;
+            let newBossList = oldBosses.filter(boss => boss.id !== id);
+            state.bosses = newBossList;
             return state;
         case 'ADD_BOSS':
-            console.log(action.payload)
-            return action.payload;
+            let newBoss = action.payload;
+            state.bosses.push(newBoss);
+            return state;
         default: return state;
     };
 };

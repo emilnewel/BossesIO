@@ -2,27 +2,28 @@ import { ADD_BOSS } from '../constants'
 
 
 export const addBoss = (newBoss) => {
-    console.log(newBoss);
     return function(dispatch) {
-        console.log(newBoss);
         return fetch('http://localhost:4500/api/bosses', {
             method: 'POST',
-            data: JSON.stringify(newBoss)
+            headers: {'Content-Type':'application/json'},
+            body: JSON.stringify(newBoss)
         }).then(response => {
             if(response.status === 404){
                 console.log(response.status);
             } else {
-                dispatch(addBossSuccess(newBoss));
+                return response.json();
             }
+        }).then(newId => {
+            dispatch(addBossSuccess({newBoss, newId}));
         });
     }
 }   
 
-const addBossSuccess = boss => {
-    console.log(boss);
+const addBossSuccess = bossData => {
+    bossData.newBoss.id = bossData.newId.id;
     return {
         type: ADD_BOSS,
-        payload: boss
+        payload: bossData.newBoss
     };
 };
 

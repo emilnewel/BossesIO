@@ -6,16 +6,9 @@ const Home = () => {
     <div>
       <img src={logo} className="App-logo" alt="logo" />
           <p>
-            Edit <code>src/App.js</code> and save to reload.
+            Welcome to <code>Bosses</code>. Here you can <code>add, edit, delete or view</code> Megaman Bosses!
           </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
+          
     </div>
   )
 }
