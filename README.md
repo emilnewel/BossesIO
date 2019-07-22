@@ -2,7 +2,7 @@
 
 This is my solution of "Small Assignment 3" in the T-427-WEPO - Web-Programming II course at Reykjavík University using ```React, Redux```
 
-The server was provided by the teacher, Arnar 
+The server was provided by the teacher, Arnar Leifsson
 
 ## Dependencies
 The dependencies for this assignment can be found in the ```package.json``` files.
