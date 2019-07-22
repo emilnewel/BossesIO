@@ -1,9 +1,11 @@
-#BossesIO
+# BossesIO
 
-This is my solution of "Small Assignment 3" in the T-427-WEPO - Web-Programming II course at Reykjavík University using ```React, Redux and Express.js. ```
+This is my solution of "Small Assignment 3" in the T-427-WEPO - Web-Programming II course at Reykjavík University using ```React, Redux```
 
-##Dependencies
-The dependencies for this assignment can be found in the package.json files.
+The server was provided by the teacher, Arnar 
+
+## Dependencies
+The dependencies for this assignment can be found in the ```package.json``` files.
 We were allowed to use ```npm create-react-app``` for this assignment
 
 
