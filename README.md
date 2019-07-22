@@ -1,68 +1,35 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+#BossesIO
 
-## Available Scripts
+This is my solution of "Small Assignment 3" in the T-427-WEPO - Web-Programming II course at Reykjavík University using ```React, Redux and Express.js. ```
 
-In the project directory, you can run:
+##Dependencies
+The dependencies for this assignment can be found in the package.json files.
+We were allowed to use ```npm create-react-app``` for this assignment
 
-### `npm start`
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## How to run
+To run, open up 2 instances of CLI's (One for client, another for server) and do the following : 
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+1. ``` npm install  ``` To install all dependencies (This needs to be done both for the client and the server) 
 
-### `npm test`
+2. ``` npm start ``` both the client and the server
+3. Voila! You can new view the webpage on ```localhost:3000```
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+## Purpose of this assignment
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+The purpose of this assignment was to get us familiar with React-Redux and Async Action Creators.
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+## Features 
+ * View various Megaman heroes
+ * Add new heroes (Name, Description and ImageURL required)
+ * Edit already existing heroes
+ * Delete already existing heroes
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+## Server API
+ * ```GET localhost:4500/bosses``` - Returns a JSON of all the bosses in the database
+ * ```GET localhost:4500/bosses/:id``` - Returns the JSON of a single boss (If it exits) otherwise returns a status code 404. 
+ * ```PATCH localhost:4500/bosses/:id``` - Updates existing boss with given data if boss with corresponding id is found and returns status code 204. Returns 404 if boss with corresponding id is not found. 
+ * ```POST localhost:4500/bosses``` - Create a new boss object and add it to the database, returns if status code 400 if unsuccessful or 201 if successful.
+ * ```DELETE localhost:4500/bosses/:id``` - Deletes an existing boss in the database with the corresponding id and reutrns 204 if successful, 404 if boss was not found. 
